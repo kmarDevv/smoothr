@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   color-scheme: light;
@@ -14,6 +11,3 @@ html, body {
 body {
   margin: 0;
 }
-=======
-@import "tailwindcss";
->>>>>>> d288090 (Initial Smoothr landing page)
