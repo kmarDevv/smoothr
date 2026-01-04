@@ -20,9 +20,12 @@ export default function WaitlistClient() {
       });
 
       const text = await res.text();
-      let data: any = {};
+      let data: { error?: string } = {};
       try {
-        data = text ? JSON.parse(text) : {};
+        const parsed = text ? JSON.parse(text) : {};
+        if (parsed && typeof parsed === "object") {
+          data = parsed as { error?: string };
+        }
       } catch {
         // not JSON (shouldn't happen now, but prevents ugly crashes)
       }
@@ -34,9 +37,13 @@ export default function WaitlistClient() {
       setStatus("success");
       setMessage("You're on the waitlist. We'll reach out soon.");
       setEmail("");
-    } catch (err: any) {
+    } catch (err) {
       setStatus("error");
-      setMessage(err?.message || "Something went wrong.");
+      if (err instanceof Error) {
+        setMessage(err.message);
+      } else {
+        setMessage("Something went wrong.");
+      }
     }
   }
 

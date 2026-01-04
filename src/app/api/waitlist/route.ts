@@ -5,19 +5,10 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 3c24128 (Add GET handler to waitlist route)
 export async function GET() {
   return NextResponse.json({ ok: true, route: "waitlist" });
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> d288090 (Initial Smoothr landing page)
-=======
->>>>>>> 3c24128 (Add GET handler to waitlist route)
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -35,7 +26,6 @@ export async function POST(req: Request) {
     }
 
     const supabase = createClient(url, key);
-
     const { error } = await supabase.from("waitlist").insert([{ email }]);
 
     // If email already exists, treat as success (nice UX)

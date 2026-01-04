@@ -1,10 +1,9 @@
-<<<<<<< HEAD
 /** @type {import('postcss-load-config').Config} */
-=======
->>>>>>> d288090 (Initial Smoothr landing page)
-export default {
+const config = {
   plugins: {
     "@tailwindcss/postcss": {},
     autoprefixer: {},
   },
 };
+
+export default config;
