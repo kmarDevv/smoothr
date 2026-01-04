@@ -7,14 +7,14 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-async function withTimeout<T>(promise: Promise<T>, ms = SUPABASE_TIMEOUT_MS): Promise<T> {
+async function withTimeout<T>(promise: PromiseLike<T>, ms = SUPABASE_TIMEOUT_MS): Promise<T> {
   let timeoutId: ReturnType<typeof setTimeout> | undefined;
   const timeout = new Promise<never>((_, reject) => {
     timeoutId = setTimeout(() => reject(new Error("Supabase request timed out.")), ms);
   });
 
   try {
-    return await Promise.race([promise, timeout]);
+    return await Promise.race([Promise.resolve(promise), timeout]);
   } finally {
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -39,29 +39,28 @@ export async function GET() {
     return NextResponse.json({ error }, { status: 500 });
   }
 
-  let response: { error: { code?: string; message: string; details?: string } | null };
   try {
-    response = await withTimeout(
+    const { error: supabaseError } = await withTimeout(
       client.from("waitlist").select("email", { count: "exact", head: true })
     );
+
+    if (supabaseError) {
+      console.error("Waitlist health check failed:", {
+        code: supabaseError.code,
+        message: supabaseError.message,
+        details: supabaseError.details,
+      });
+
+      const message =
+        process.env.NODE_ENV === "production"
+          ? "Supabase error."
+          : supabaseError.message || "Supabase error.";
+      return NextResponse.json({ error: message }, { status: 500 });
+    }
   } catch (err) {
     const message = err instanceof Error ? err.message : "Supabase request failed.";
     console.error("Waitlist health check failed:", err);
     return NextResponse.json({ error: message }, { status: 504 });
-  }
-
-  if (response.error) {
-    console.error("Waitlist health check failed:", {
-      code: response.error.code,
-      message: response.error.message,
-      details: response.error.details,
-    });
-
-    const message =
-      process.env.NODE_ENV === "production"
-        ? "Supabase error."
-        : response.error.message || "Supabase error.";
-    return NextResponse.json({ error: message }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true, route: "waitlist" });
@@ -81,9 +80,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error }, { status: 500 });
     }
 
-    let response: { error: { code?: string; message: string; details?: string } | null };
+    let supabaseError: { code?: string; message: string; details?: string } | null;
     try {
-      response = await withTimeout(client.from("waitlist").insert([{ email }]));
+      ({ error: supabaseError } = await withTimeout(client.from("waitlist").insert([{ email }])));
     } catch (err) {
       const message = err instanceof Error ? err.message : "Supabase request failed.";
       console.error("Waitlist insert failed:", err);
@@ -91,19 +90,19 @@ export async function POST(req: Request) {
     }
 
     // If email already exists, treat as success (nice UX)
-    if (response.error?.code === "23505") {
+    if (supabaseError?.code === "23505") {
       return NextResponse.json({ ok: true });
     }
-    if (response.error) {
+    if (supabaseError) {
       console.error("Waitlist insert failed:", {
-        code: response.error.code,
-        message: response.error.message,
-        details: response.error.details,
+        code: supabaseError.code,
+        message: supabaseError.message,
+        details: supabaseError.details,
       });
       const message =
         process.env.NODE_ENV === "production"
           ? "Could not save email. Try again."
-          : response.error.message || "Could not save email. Try again.";
+          : supabaseError.message || "Could not save email. Try again.";
       return NextResponse.json({ error: message }, { status: 500 });
     }
 
