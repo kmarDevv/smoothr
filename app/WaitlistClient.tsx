@@ -19,6 +19,7 @@ export default function WaitlistClient() {
         body: JSON.stringify({ email }),
       });
 
+<<<<<<< HEAD
       const text = await res.text();
       let data: any = {};
       try {
@@ -37,11 +38,26 @@ export default function WaitlistClient() {
     } catch (err: any) {
       setStatus("error");
       setMessage(err?.message || "Something went wrong.");
+=======
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || "Something went wrong.");
+
+      setStatus("success");
+      setMessage("You’re on the waitlist. 🎉");
+      setEmail("");
+    } catch (err: any) {
+      setStatus("error");
+      setMessage(err.message || "Error.");
+>>>>>>> d288090 (Initial Smoothr landing page)
     }
   }
 
   return (
+<<<<<<< HEAD
     <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+=======
+    <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row">
+>>>>>>> d288090 (Initial Smoothr landing page)
       <input
         type="email"
         required
@@ -50,7 +66,10 @@ export default function WaitlistClient() {
         placeholder="Enter your email"
         className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-zinc-200"
       />
+<<<<<<< HEAD
 
+=======
+>>>>>>> d288090 (Initial Smoothr landing page)
       <button
         type="submit"
         disabled={status === "loading"}
@@ -60,7 +79,15 @@ export default function WaitlistClient() {
       </button>
 
       {message ? (
+<<<<<<< HEAD
         <p className={`text-sm ${status === "success" ? "text-green-700" : "text-red-600"}`}>
+=======
+        <p
+          className={`text-sm ${
+            status === "success" ? "text-green-700" : status === "error" ? "text-red-600" : "text-zinc-600"
+          }`}
+        >
+>>>>>>> d288090 (Initial Smoothr landing page)
           {message}
         </p>
       ) : null}

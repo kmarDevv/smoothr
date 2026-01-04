@@ -5,10 +5,13 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+<<<<<<< HEAD
 export async function GET() {
   return NextResponse.json({ ok: true, route: "waitlist" });
 }
 
+=======
+>>>>>>> d288090 (Initial Smoothr landing page)
 export async function POST(req: Request) {
   try {
     const body = await req.json();
