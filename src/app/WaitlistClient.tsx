@@ -55,18 +55,18 @@ export default function WaitlistClient() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
-        className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-zinc-200"
+        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/90 outline-none placeholder:text-white/50 focus:ring-2 focus:ring-[#2AFF7A]/60"
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="rounded-xl bg-zinc-900 px-5 py-3 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60"
+        className="rounded-xl bg-[#2AFF7A] px-5 py-3 text-sm font-medium text-black hover:bg-[#5CFF99] disabled:opacity-60"
       >
         {status === "loading" ? "Joining..." : "Get Early Access"}
       </button>
 
       {message ? (
-        <p className={`text-sm ${status === "success" ? "text-green-700" : "text-red-600"}`}>
+        <p className={`text-sm ${status === "success" ? "text-[#2AFF7A]" : "text-[#F97316]"}`}>
           {message}
         </p>
       ) : null}
