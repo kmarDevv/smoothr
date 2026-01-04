@@ -6,12 +6,18 @@ function isValidEmail(email: string) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3c24128 (Add GET handler to waitlist route)
 export async function GET() {
   return NextResponse.json({ ok: true, route: "waitlist" });
 }
 
+<<<<<<< HEAD
 =======
 >>>>>>> d288090 (Initial Smoothr landing page)
+=======
+>>>>>>> 3c24128 (Add GET handler to waitlist route)
 export async function POST(req: Request) {
   try {
     const body = await req.json();

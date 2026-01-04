@@ -1,8 +1,5 @@
 import WaitlistClient from "./WaitlistClient";
-<<<<<<< HEAD
 
-=======
->>>>>>> d288090 (Initial Smoothr landing page)
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-zinc-900">
@@ -35,10 +32,6 @@ export default function Home() {
               <p className="mt-1 text-sm text-zinc-600">
                 Early users get priority access and founder pricing. No spam.
               </p>
-<<<<<<< HEAD
-=======
-
->>>>>>> d288090 (Initial Smoothr landing page)
               <WaitlistClient />
             </div>
 
@@ -92,21 +85,13 @@ export default function Home() {
             <div className="rounded-2xl border border-zinc-200 p-5">
               <h3 className="font-medium">Does Smoothr replace Google/Apple Maps?</h3>
               <p className="mt-2 text-sm text-zinc-600">
-<<<<<<< HEAD
                 Not yet. The early beta focuses on cleaner routing and smarter road choices.
-=======
-                Not yet — the early beta focuses on cleaner routing and smarter road choices.
->>>>>>> d288090 (Initial Smoothr landing page)
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-5">
               <h3 className="font-medium">How does Smoothr detect dirt roads?</h3>
               <p className="mt-2 text-sm text-zinc-600">
-<<<<<<< HEAD
                 We combine map data with road surface tags and user reports, and improve over time.
-=======
-                We combine map data with road surface tags and user reports — and improve over time.
->>>>>>> d288090 (Initial Smoothr landing page)
               </p>
             </div>
           </div>
@@ -115,11 +100,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="mt-16 border-t border-zinc-200 pt-8 text-sm text-zinc-500">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-<<<<<<< HEAD
             <span>&copy; {new Date().getFullYear()} Smoothr</span>
-=======
-            <span>© {new Date().getFullYear()} Smoothr</span>
->>>>>>> d288090 (Initial Smoothr landing page)
             <a className="hover:text-zinc-700" href="mailto:hello@smoothr.app">
               hello@smoothr.app
             </a>
