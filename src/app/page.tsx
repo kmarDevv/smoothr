@@ -16,7 +16,7 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
           <div className="flex items-start justify-between gap-6">
             <div>
-              <div className="text-lg font-semibold tracking-tight">Smoothr</div>
+              <div className="text-2xl font-semibold tracking-tight sm:text-3xl">Smoothr</div>
               <p className="mt-2 text-sm text-white/70">
                 The first navigation app designed with car care in mind.
               </p>
@@ -70,12 +70,12 @@ export default function HomePage() {
                   <span className="ml-2 transition group-hover:translate-x-0.5">&rarr;</span>
                 </Link>
 
-                <Link
-                  href="#waitlist"
+                <a
+                  href="/join"
                   className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30"
                 >
                   Join the waitlist
-                </Link>
+                </a>
               </div>
 
               {/* CTA helper / FOMO copy */}
@@ -164,18 +164,6 @@ export default function HomePage() {
           </div>
 
           {/* Anchor targets (for CTA links) */}
-          <div
-            id="waitlist"
-            className="mt-24 max-w-xl rounded-2xl border border-white/10 bg-white/5 p-6"
-          >
-            <h2 className="text-xl font-semibold">Get Early Access</h2>
-            <p className="mt-2 text-white/70">
-              Early users get priority access and founder pricing. No spam.
-            </p>
-            <WaitlistClient />
-            <p className="mt-3 text-xs text-white/60">We'll never share your info with anyone.</p>
-          </div>
-
           <section className="mt-24 rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-transparent p-8">
             <div className="flex items-center gap-3">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#2AFF7A]/15 text-sm font-semibold text-[#2AFF7A]">
@@ -228,8 +216,29 @@ export default function HomePage() {
               </div>
             </div>
           </section>
+
+          <div
+            id="waitlist"
+            className="mt-24 max-w-xl rounded-2xl border border-white/10 bg-white/5 p-6"
+          >
+            <h2 className="text-xl font-semibold">Get Early Access</h2>
+            <p className="mt-2 text-white/70">
+              Early users get priority access and founder pricing. No spam.
+            </p>
+            <WaitlistClient />
+            <p className="mt-3 text-xs text-white/60">We'll never share your info with anyone.</p>
+          </div>
         </div>
       </section>
+
+      <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
+        <Link
+          href="#waitlist"
+          className="flex items-center justify-center rounded-full bg-[#2AFF7A] px-4 py-3 text-sm font-semibold text-black shadow-lg shadow-[#2AFF7A]/30"
+        >
+          Get Early Access
+        </Link>
+      </div>
     </main>
   );
 }

@@ -1,8 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function WaitlistClient() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -37,6 +39,7 @@ export default function WaitlistClient() {
       setStatus("success");
       setMessage("You're on the waitlist. We'll reach out soon.");
       setEmail("");
+      router.push("/thank-you");
     } catch (err) {
       setStatus("error");
       if (err instanceof Error) {
